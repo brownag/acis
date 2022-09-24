@@ -1,11 +1,19 @@
-Package: rACIS
+Package: acis
 Type: Package
-Title: R interface to Applied Climate Information System (ACIS) Web Services with a focus on applications for the Soil Climate Analysis Network (SCAN)
+Title: R interface to Applied Climate Information System (ACIS) Web Services
 Version: 0.0.0.9001
 Author: Andrew G. Brown
 Maintainer: Andrew G. Brown <andrew.g.brown@usda.gov>
-Description: This package provides wrapper functions around standard Applied Climate Information System (ACIS) Web Services. 
+URL: https://github.com/brownag/acis
+BugReports: https://github.com/brownag/acis/issues
+Description: Provides wrapper functions for Applied Climate Information System (ACIS) Web Services. 
     ACIS Web Services (described at <http://www.rcc-acis.org/docs_webservices.html>) are accessed by seven types of calls: station metadata (StnMeta), raw or summarized climate data for a single station for a range of dates (StnData), data for multiple stations (MultiStnData), gridded data sets (GridData & GridData2), hourly data (StnHourly), and metadata for a geographic area (General). 
-License: GPL-3
+License: GPL-3 + file LICENSE
 Encoding: UTF-8
 LazyData: true
+RoxygenNote: 7.2.1
+Roxygen: list(markdown = TRUE)
+Imports: 
+    data.table,
+    jsonlite,
+    terra
