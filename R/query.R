@@ -20,25 +20,27 @@ acis_query <- function(call,
   q <- .acis_query_string(params = params,
                           base_url = base_url,
                           call =  call)
+
   if (query_string) {
     return(q)
   }
 
-
   switch(tolower(trimws(params$output)),
          "csv" = {
-           res <- try(data.table::fread(q))
-           if (inherits(res, 'data.table')) {
+            res <- try(data.table::fread(q))
+            if (inherits(res, 'data.table')) {
              attr(res, "station_name") <- colnames(res)[1]
              colnames(res)[1] <- "V1"
              res <- as.data.frame(res)
-           }
-           res
+            }
+            res
          },
          "image" = {
-           try(terra::rast(q))
+            try(terra::rast(q))
          },
-         try(jsonlite::read_json(q))
+         { # default is JSON
+            try(jsonlite::read_json(q))
+         }
   )
 }
 
@@ -60,9 +62,12 @@ acis_call_names <- function() {
 .acis_query_string <- function(params = list(),
                                base_url = "http://data.rcc-acis.org",
                                call = acis_call_names()) {
+
   call <- match.arg(call, acis_call_names(), several.ok = TRUE)
+
   file.path(base_url, paste0(call, "?",
-                             paste(paste0(names(params), "=", utils::URLencode(as.character(params), reserved = TRUE)),
-                                   collapse = "&"))
-  )
+                             paste(paste0(names(params), "=",
+                                          utils::URLencode(as.character(params),
+                                                           reserved = TRUE)),
+                                   collapse = "&")))
 }
