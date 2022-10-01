@@ -31,3 +31,27 @@ acis_call_names()
 \description{
 \code{acis_query()} builds URLs and makes requests to obtain data from the ACIS Web Services.
 }
+\examples{
+\donttest{
+# ITHACA CORNELL UNIV (sid: 304174; -76.44905, 42.44915; 960m elev)
+acis_query(
+ "StnMeta",
+ params = list(
+   sids = 304174,
+   output = 'json'
+ )
+)
+
+# get average+max temperature, and precipitation for January 2020
+acis_query(
+  "StnData",
+  params = list(
+    sid = 304174,
+    sdate = '2020-01-01',
+    edate = '2020-01-31',
+    elems = 'avgt,maxt,pcpn',
+    output = 'csv'
+  )
+)
+}
+}
