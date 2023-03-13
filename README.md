@@ -24,7 +24,7 @@ You can install the development version of acis from
 
 ``` r
 # install.packages("devtools")
-devtools::install_github("brownag/rACIS")
+devtools::install_github("brownag/acis")
 ```
 
 ## Example
